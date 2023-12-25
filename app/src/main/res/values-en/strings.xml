@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">To do App</string>
+    <string name="tarea_form_ejemplo">Wash the car</string>
+    <string name="tarea_form_agregar" >Add task</string>
+    <string name="logo">Logo</string>
+    <string name="tarea_form_eliminar">Delete task</string>
+</resources>
