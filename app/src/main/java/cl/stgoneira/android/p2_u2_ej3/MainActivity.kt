@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -55,11 +56,33 @@ import cl.stgoneira.android.p2_u2_ej3.ui.theme.viewmodels.TareasViewModel
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
+
+    val tareasVm: TareasViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.v("MainActivity::onCreate", "Recuperando tareas en disco")
+        try {
+            tareasVm.obtenerTareasGuardadasEnDisco(openFileInput(TareasViewModel.FILE_NAME))
+        } catch (e:Exception) {
+            Log.e("MainActivity::onCreate", "Archivo con tareas no existe!!")
+        }
+
         setContent {
             AppTareas()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.v("MainActivity::onPause", "Guardando a disco")
+        tareasVm.guardarTareasEnDisco(openFileOutput(TareasViewModel.FILE_NAME, MODE_PRIVATE))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.v("MainActivity::onStop", "Guardando a disco")
+
     }
 }
 

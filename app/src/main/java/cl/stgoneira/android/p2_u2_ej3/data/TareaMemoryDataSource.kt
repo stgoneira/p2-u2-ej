@@ -2,7 +2,6 @@ package cl.stgoneira.android.p2_u2_ej3.data
 
 import android.util.Log
 import cl.stgoneira.android.p2_u2_ej3.data.modelo.Tarea
-import java.util.UUID
 
 class TareaMemoryDataSource {
     private val _tareas = mutableListOf<Tarea>()
@@ -25,10 +24,10 @@ class TareaMemoryDataSource {
     }
 
     private fun tareasDePrueba():List<Tarea> = listOf(
+        /*
         Tarea(UUID.randomUUID().toString(), "Lavar la ropa")
         , Tarea(UUID.randomUUID().toString(), "Cocinar")
         , Tarea(UUID.randomUUID().toString(), "Supermercado")
-        /*
         , Tarea(System.currentTimeMillis(), "Veterinario Rocky")
         , Tarea(System.currentTimeMillis(), "Terminar Taller 1")
         , Tarea(System.currentTimeMillis(), "Matrícula")

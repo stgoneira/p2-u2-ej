@@ -12,11 +12,17 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.util.UUID
 
 class TareasViewModel(
     private val tareasRepository: TareasRepository = TareasRepository()
 ) : ViewModel() {
+
+    companion object {
+        const val FILE_NAME = "tareas.data"
+    }
 
     private var job: Job? = null
 
@@ -30,7 +36,15 @@ class TareasViewModel(
         obtenerTareas()
     }
 
-    fun obtenerTareas() {
+    fun obtenerTareasGuardadasEnDisco(fileInputStream: FileInputStream) {
+        tareasRepository.getTareasEnDisco(fileInputStream)
+    }
+
+    fun guardarTareasEnDisco(fileOutputStream: FileOutputStream) {
+        tareasRepository.guardarTareasEnDisco(fileOutputStream)
+    }
+
+    private fun obtenerTareas() {
         job?.cancel()
         job = viewModelScope.launch {
             val tareasStream = tareasRepository.getTareasStream()
